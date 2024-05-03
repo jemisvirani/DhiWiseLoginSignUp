@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="signUpVM" type="com.jemissapplication.app.modules.signup.data.viewmodel.SignUpVM"/>
+    </data>
+    <LinearLayout android:id="@+id/linearSignUp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical" style="@style/groupStylewhite_A700">
+        <androidx.appcompat.widget.Toolbar
+            android:gravity="center_horizontal"
+            android:id="@+id/toolbarToolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" app:contentInsetStart="0dp">
+            <LinearLayout android:id="@+id/linearRowiconchevron"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8pxv"
+                android:layout_marginEnd="@dimen/_153pxh"
+                android:layout_marginStart="@dimen/_32pxh"
+                android:layout_marginTop="@dimen/_8pxv"
+                android:layout_width="match_parent" android:orientation="horizontal">
+                <ImageView android:id="@+id/imageIconchevronOne"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="@dimen/_24pxh"
+                    android:layout_width="@dimen/_24pxh"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_icon_chevron_left"
+                    tools:ignore="ContentDescription" tools:src="@drawable/img_icon_chevron_left"/>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtSignup"
+                    android:layout_gravity="bottom"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_99pxh"
+                    android:layout_marginTop="@dimen/_2pxv"
+                    android:layout_width="wrap_content"
+                    android:singleLine="true"
+                    android:text="@{signUpVM.signUpModel.txtSignup}"
+                    style="@style/txtRalewayromanbold18" tools:text="@string/lbl_sign_up"/>
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+        <LinearLayout android:id="@+id/linearColumnname"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_39pxv"
+            android:paddingEnd="@dimen/_24pxh"
+            android:paddingStart="@dimen/_24pxh" android:paddingTop="@dimen/_39pxv">
+            <EditText
+                android:background="@drawable/rectangle_border_gray_200_radius_6"
+                android:drawablePadding="@dimen/_16pxh"
+                android:drawableStart="@drawable/img_lock"
+                android:ellipsize="end"
+                android:hint="@string/lbl_enter_your_name"
+                android:id="@+id/etName" android:inputType="text"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/_18pxv"
+                android:paddingEnd="@dimen/_30pxh"
+                android:paddingStart="@dimen/_24pxh"
+                android:paddingTop="@dimen/_18pxv"
+                android:singleLine="true"
+                android:text=""
+                android:textColorHint="@color/blue_gray_300"
+                style="@style/etRoundedOutline" tools:ignore="Autofill"/>
+            <EditText
+                android:background="@drawable/rectangle_border_gray_200_radius_6"
+                android:drawablePadding="@dimen/_16pxh"
+                android:drawableStart="@drawable/img_checkmark"
+                android:ellipsize="end"
+                android:hint="@string/msg_enter_your_email"
+                android:id="@+id/etEmail" android:inputType="text"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16pxv"
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/_18pxv"
+                android:paddingEnd="@dimen/_30pxh"
+                android:paddingStart="@dimen/_24pxh"
+                android:paddingTop="@dimen/_18pxv"
+                android:singleLine="true"
+                android:text=""
+                android:textColorHint="@color/blue_gray_300"
+                style="@style/etRoundedOutline" tools:ignore="Autofill"/>
+            <EditText
+                android:background="@drawable/rectangle_border_gray_200_radius_6"
+                android:drawableEnd="@drawable/img_eye"
+                android:drawablePadding="@dimen/_30pxh"
+                android:drawableStart="@drawable/img_location"
+                android:ellipsize="end"
+                android:hint="@string/msg_enter_your_password"
+                android:id="@+id/etPassword" android:inputType="text"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16pxv"
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/_18pxv"
+                android:paddingEnd="@dimen/_24pxh"
+                android:paddingStart="@dimen/_24pxh"
+                android:paddingTop="@dimen/_18pxv"
+                android:singleLine="true"
+                android:text=""
+                android:textColorHint="@color/blue_gray_300"
+                style="@style/etRoundedOutline" tools:ignore="Autofill"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:fontFamily="@font/sf_pro_display"
+                android:id="@+id/checkBoxIagreetothemedi"
+                android:layout_gravity="start"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_28pxh"
+                android:layout_marginTop="@dimen/_16pxv"
+                android:layout_width="wrap_content"
+                android:text="@string/msg_i_agree_to_the_medidoc"
+                android:textColor="@color/blue_gray_800"
+                android:textFontWeight="400"
+                android:textSize="@dimen/_14pxh"
+                android:textStyle="normal" tools:text="@string/msg_i_agree_to_the_medidoc"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:ellipsize="end" android:gravity="center"
+                android:id="@+id/btnSignUp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="@dimen/_56pxv"
+                android:layout_marginTop="@dimen/_28pxv"
+                android:layout_width="@dimen/_327pxh"
+                android:paddingBottom="@dimen/_18pxv"
+                android:paddingEnd="@dimen/_30pxh"
+                android:paddingStart="@dimen/_30pxh"
+                android:paddingTop="@dimen/_18pxv"
+                android:singleLine="true"
+                android:text="@string/lbl_sign_up"
+                android:textAllCaps="false"
+                style="@style/btnSolidRounded" tools:text="@string/lbl_sign_up"/>
+            <LinearLayout android:gravity="center_vertical"
+                android:id="@+id/linearLoginlink"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5pxv"
+                android:layout_marginEnd="@dimen/_44pxh"
+                android:layout_marginStart="@dimen/_44pxh"
+                android:layout_marginTop="@dimen/_28pxv"
+                android:layout_width="match_parent" android:orientation="horizontal">
+                <TextView android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:id="@+id/txtConfirmation"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:letterSpacing="0.03"
+                    android:singleLine="true"
+                    android:text="@{signUpVM.signUpModel.txtConfirmation}"
+                    style="@style/txtRalewayromanregular15" tools:text="@string/msg_already_have_an"/>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtLogin"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4pxh"
+                    android:layout_width="wrap_content"
+                    android:singleLine="true"
+                    android:text="@{signUpVM.signUpModel.txtLogin}"
+                    style="@style/txtRalewayromanmedium15" tools:text="@string/lbl_log_in"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

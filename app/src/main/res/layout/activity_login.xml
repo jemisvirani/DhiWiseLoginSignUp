@@ -1,9 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".modules.signup.ui.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linearLogin"
+        style="@style/groupStylewhite_A700"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            app:contentInsetStart="0dp">
+
+            <LinearLayout
+                android:id="@+id/linearRowiconchevron"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_32pxh"
+                android:layout_marginTop="@dimen/_8pxv"
+                android:layout_marginEnd="@dimen/_153pxh"
+                android:layout_marginBottom="@dimen/_8pxv"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageIconchevronOne"
+                    android:layout_width="@dimen/_24pxh"
+                    android:layout_height="@dimen/_24pxh"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_icon_chevron_left"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/img_icon_chevron_left" />
+
+                <TextView
+                    android:id="@+id/txtLoginData"
+                    style="@style/txtRalewayromanbold18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="@dimen/_99pxh"
+                    android:layout_marginTop="@dimen/_2pxv"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Login"
+                    tools:text="Login" />
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:id="@+id/linearColumnname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/_24pxh"
+            android:paddingTop="@dimen/_39pxv"
+            android:paddingEnd="@dimen/_24pxh"
+            android:paddingBottom="@dimen/_39pxv">
+
+
+
+            <EditText
+                android:id="@+id/etLoginEmail"
+                style="@style/etRoundedOutline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_border_gray_200_radius_6"
+                android:drawableStart="@drawable/img_checkmark"
+                android:drawablePadding="@dimen/_16pxh"
+                android:ellipsize="end"
+                android:hint="@string/msg_enter_your_email"
+                android:inputType="text"
+                android:paddingStart="@dimen/_24pxh"
+                android:paddingTop="@dimen/_18pxv"
+                android:paddingEnd="@dimen/_30pxh"
+                android:paddingBottom="@dimen/_18pxv"
+                android:singleLine="true"
+                android:text=""
+                android:textColorHint="@color/blue_gray_300"
+                tools:ignore="Autofill" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16pxv"
+                android:background="@drawable/rectangle_border_gray_200_radius_6"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etLoginPassword"
+                    style="@style/etRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:drawableStart="@drawable/img_location"
+                    android:drawablePadding="@dimen/_16pxh"
+                    android:ellipsize="end"
+                    android:hint="@string/msg_enter_your_password"
+                    android:inputType="textPassword"
+                    android:paddingStart="@dimen/_24pxh"
+                    android:paddingTop="@dimen/_18pxv"
+                    android:paddingEnd="@dimen/_24pxh"
+                    android:paddingBottom="@dimen/_18pxv"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColorHint="@color/blue_gray_300"
+                    android:textSize="@dimen/_16pxh"
+                    tools:ignore="Autofill" />
+
+                <ImageView
+                    android:id="@+id/ivLoginHideShow"
+                    android:layout_width="@dimen/_20pxh"
+                    android:layout_height="@dimen/_20pxh"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/_20pxh"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_eye_hide"
+                    app:tint="#A1A8B0" />
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogin"
+                style="@style/btnSolidRounded"
+                android:layout_width="@dimen/_327pxh"
+                android:layout_height="@dimen/_60pxv"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_28pxv"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingStart="@dimen/_30pxh"
+                android:paddingEnd="@dimen/_30pxh"
+                android:singleLine="true"
+                android:text="Login"
+                android:textAllCaps="false"
+                tools:text="Login" />
+
+            <LinearLayout
+                android:id="@+id/linearLoginlink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_28pxv"
+                android:layout_marginBottom="@dimen/_5pxv"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtConfirmation"
+                    style="@style/txtRalewayromanregular15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:letterSpacing="0.03"
+                    android:singleLine="true"
+                    android:text="Don’t have an account?"
+                    tools:text="@string/msg_already_have_an" />
+
+                <TextView
+                    android:id="@+id/txtSignUp"
+                    style="@style/txtRalewayromanmedium15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/_4pxh"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Sign Up"
+                    tools:text="Sign Up" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="signUpVM"
-            type="com.jemissapplication.app.modules.signup.data.viewmodel.SignUpVM" />
-    </data>
 
     <LinearLayout
         android:id="@+id/linearSignUp"
@@ -45,7 +39,7 @@
                     tools:src="@drawable/img_icon_chevron_left" />
 
                 <TextView
-                    android:id="@+id/txtSignup"
+                    android:id="@+id/txtSignUp"
                     style="@style/txtRalewayromanbold18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -54,7 +48,6 @@
                     android:layout_marginTop="@dimen/_2pxv"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="@{signUpVM.signUpModel.txtSignup}"
                     tools:text="@string/lbl_sign_up" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -197,13 +190,12 @@
                 <TextView
                     android:id="@+id/txtConfirmation"
                     style="@style/txtRalewayromanregular15"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:letterSpacing="0.03"
                     android:singleLine="true"
-                    android:text="@{signUpVM.signUpModel.txtConfirmation}"
                     tools:text="@string/msg_already_have_an" />
 
                 <TextView
@@ -215,7 +207,6 @@
                     android:layout_marginStart="@dimen/_4pxh"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="@{signUpVM.signUpModel.txtLogin}"
                     tools:text="@string/lbl_log_in" />
             </LinearLayout>
         </LinearLayout>

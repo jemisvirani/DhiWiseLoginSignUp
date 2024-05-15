@@ -6,13 +6,18 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.eclatsol.kotlinaapi.model.SignUpRequest
 import com.eclatsol.kotlinaapi.model.SignUpResponse
 import com.jemissapplication.app.R
 import com.jemissapplication.app.appcomponents.base.BaseActivity
 import com.jemissapplication.app.databinding.ActivitySignUpBinding
-import com.jemissapplication.app.modules.signup.data.viewmodel.SignUpVM
+import com.jemissapplication.app.modules.signup.data.modelclass.LoginRequest
+import com.jemissapplication.app.modules.signup.data.modelclass.LoginResponse
 import com.jemissapplication.app.modules.signup.retrofitApi.ApiServiceData
+import com.jemissapplication.app.modules.signup.roomdatabase.Token
+import com.jemissapplication.app.modules.signup.roomdatabase.TokenViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,21 +25,33 @@ import retrofit2.Response
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign_up),
     View.OnClickListener {
-    private val viewModel: SignUpVM by viewModels<SignUpVM>()
-    val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$"
+//    private val viewModel: SignUpVM by viewModels<SignUpVM>()
+    val emailRegex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     var isValid : Boolean = false
     var isValidPassword : Boolean = false
     var isPasswordVisible = false
     var isCheck : Boolean = false
-
+    lateinit var viewModel: TokenViewModel
+    var addData = ArrayList<Token>()
 
     override fun onInitialized(): Unit {
-        viewModel.navArguments = intent.extras?.getBundle("bundle")
-        binding.signUpVM = viewModel
+//        viewModel.navArguments = intent.extras?.getBundle("bundle")
+//        binding.signUpVM = viewModel
 
         binding.btnSignUp.setOnClickListener(this)
         binding.ivHideShow.setOnClickListener(this)
         binding.checkBox.setOnClickListener(this)
+        binding.txtLogin.setOnClickListener(this)
+
+
+        viewModel = ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(TokenViewModel::class.java)
+        viewModel.allToken.observe(this, Observer {list->
+            list.let {
+//                Log.e("ssffdsfd", "onInitialized: ${list.get(0)}")
+                addData.addAll(it)
+//                Log.e("ssffdsfd", "onInitialized: " + addData.get(0))
+            }
+        })
 
     }
 
@@ -64,54 +81,8 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             R.id.checkBox ->{
                 isCheck = binding.checkBox.isChecked
             }
-        }
-    }
-
-    private fun isCheckValid(): Boolean {
-        if (isCheck){
-            return true
-        }else{
-            Toast.makeText(this@SignUpActivity,"Please select checkbox",Toast.LENGTH_SHORT).show()
-        }
-        return isCheck
-    }
-
-    private fun validPassword(): Boolean {
-        return when{
-            binding.etPassword.text.toString().trim().isEmpty() ->{
-                Toast.makeText(this@SignUpActivity,"Please enter your password",Toast.LENGTH_SHORT).show()
-                false
-            }
-            binding.etPassword.text.toString().trim().isNotEmpty() ->{
-                isValidPassword = isValidPassword(binding.etPassword.text.toString().trim())
-                return isValidPassword
-            }
-            else ->{
-               true
-            }
-        }
-
-    }
-
-    private fun validSignUp() : Boolean {
-        return when{
-            binding.etName.text.toString().trim().isEmpty() ->{
-                Toast.makeText(this@SignUpActivity,"Please enter username",Toast.LENGTH_SHORT).show()
-                false
-            }
-            binding.etEmail.text.toString().trim().isEmpty() ->{
-                Toast.makeText(this@SignUpActivity,"Please enter email",Toast.LENGTH_SHORT).show()
-                false
-            }
-            binding.etEmail.text.toString().trim().isNotEmpty() ->{
-                isValid = isValidEmail(binding.etEmail.text.toString().trim())
-                if (!isValid){
-                    Toast.makeText(this@SignUpActivity,"Please enter your valid email",Toast.LENGTH_SHORT).show()
-                }
-                return isValid
-            }
-            else ->{
-                true
+            R.id.txtLogin ->{
+                startActivity(Intent(this@SignUpActivity,LoginActivity::class.java))
             }
         }
     }
@@ -133,6 +104,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
                 ) {
                     if (response.isSuccessful) {
                         Log.e("asfdsf", "Success")
+                        loginApi(binding.etEmail.text.toString().trim(),binding.etPassword.text.toString().trim());
                         startActivity(Intent(this@SignUpActivity,HomeActivity::class.java))
                         finish()
                         Toast.makeText(this@SignUpActivity,"Successfully SignUp",Toast.LENGTH_SHORT).show()
@@ -149,8 +121,60 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             })
     }
 
+    private fun isCheckValid(): Boolean {
+        if (isCheck){
+            return true
+        }else{
+            Toast.makeText(this@SignUpActivity,"Please select your checkbox",Toast.LENGTH_SHORT).show()
+        }
+        return isCheck
+    }
+
+
+    private fun validSignUp() : Boolean {
+        return when{
+            binding.etName.text.toString().trim().isEmpty() ->{
+                Toast.makeText(this@SignUpActivity,"Please enter your username",Toast.LENGTH_SHORT).show()
+                false
+            }
+            binding.etEmail.text.toString().trim().isEmpty() ->{
+                Toast.makeText(this@SignUpActivity,"Please enter your email",Toast.LENGTH_SHORT).show()
+                false
+            }
+            binding.etEmail.text.toString().trim().isNotEmpty() ->{
+                isValid = isValidEmail(binding.etEmail.text.toString().trim())
+                if (!isValid){
+                    Toast.makeText(this@SignUpActivity,"Please enter your valid email",Toast.LENGTH_SHORT).show()
+                }
+                return isValid
+            }
+            else ->{
+                true
+            }
+        }
+    }
+
+
+
     fun isValidEmail(email: String): Boolean {
         return email.matches(emailRegex.toRegex())
+    }
+
+    private fun validPassword(): Boolean {
+        return when{
+            binding.etPassword.text.toString().trim().isEmpty() ->{
+                Toast.makeText(this@SignUpActivity,"Please enter your password",Toast.LENGTH_SHORT).show()
+                false
+            }
+            binding.etPassword.text.toString().trim().isNotEmpty() ->{
+                isValidPassword = isValidPassword(binding.etPassword.text.toString().trim())
+                return isValidPassword
+            }
+            else ->{
+                true
+            }
+        }
+
     }
 
     private fun isValidPassword(password: String): Boolean {
@@ -174,7 +198,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             return false
         }
         if (password.length < 8) {
-            Toast.makeText(this@SignUpActivity,"Please minimum enter your 8 character ",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@SignUpActivity,"Please enter your minimum 8 character ",Toast.LENGTH_SHORT).show()
             return false
         }
         return true
@@ -193,5 +217,26 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             binding.ivHideShow.setImageResource(R.drawable.ic_eye_show)
         }
         binding.etPassword.setSelection(binding.etPassword.text.length)
+    }
+
+    private fun loginApi(username: String, password: String) {
+        val loginRequest = LoginRequest(username,password)
+        ApiServiceData.apiService.loginApi(loginRequest).enqueue(object : Callback<LoginResponse>{
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if(response.isSuccessful){
+                    Log.e("fdgdgdsss", "Login Success " + response.body()?.data?.token)
+//                    startActivity(Intent(this@SignUpActivity,HomeActivity::class.java))
+                    val token = response.body()?.data?.token.toString()
+                    viewModel.insert(Token(token,binding.etEmail.text.toString().trim(),binding.etPassword.text.toString().trim()))
+                }else{
+                    Log.e("fdgdgd", "Failed To")
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Log.e("fdgdgd", "onFailure: ")
+            }
+
+        })
     }
 }

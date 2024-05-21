@@ -11,4 +11,5 @@ and Privacy Policy</string>
     <string name="lbl_sign_up">Sign Up</string>
     <string name="lbl_enter_your_name">Enter your name</string>
     <string name="lbl_log_in">Log In</string>
+    <string name="saved_high_score_key">save</string>
 </resources>
